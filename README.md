@@ -80,7 +80,7 @@ To avoid this happening, we want the command to run as a new process. We create 
 
 The return value of `fork` tells us if we're in the child or the parent: it returns `0` for the child, and the id of the new process in the parent.
 
-__Exercies 3.__ Modify your shell to call `fork`, and then `exec` in the child.
+__Exercise 3.__ Modify your shell to call `fork`, and then `exec` in the child.
 
 Congratulations! Your shell is now mildly useful. There's still a niggle though: when you run a command, your prompt is probably printing out before the command's output.
 
