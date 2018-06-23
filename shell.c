@@ -7,10 +7,11 @@
 #include "utils.h"
 
 int main() {
+    char *prompt = "DO$ "; // insert your prompt here
     char *line = NULL;
     size_t len = 0;
     
-    while(fputs("DO> ", stdout)) {
+    while(fputs(prompt, stdout)) {
         getline(&line, &len, stdin);
         printf("%s", line);
     }
