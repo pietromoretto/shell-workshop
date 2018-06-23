@@ -19,7 +19,13 @@ int main() {
             fprintf(stderr, "Fork failed\n"); 
         } else if(pid == 0) { // child process
             cmd_struct *command = parse_command(line);
-            execvp(command->progname, command->args);
+            // handle cd special case
+            if(strcmp(command->progname, "cd") == 0) {
+                chdir(command->args[1]);
+            } else {
+                execvp(command->progname, command->args);
+            }
+
         } else { // parent process
             int w = wait(NULL); // wait for the child to end
         }
