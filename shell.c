@@ -20,6 +20,8 @@ int main() {
         } else if(pid == 0) { // child process
             cmd_struct *command = parse_command(line);
             execvp(command->progname, command->args);
+        } else { // parent process
+            int w = wait(NULL); // wait for the child to end
         }
     }
     return 0;
