@@ -4,7 +4,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#include "utils.h"
+#include "utils.c"
 
 int main() {
     char *prompt = "DO$ "; // insert your prompt here
@@ -13,7 +13,8 @@ int main() {
     
     while(fputs(prompt, stdout)) {
         getline(&line, &len, stdin);
-        printf("%s", line);
+        cmd_struct *command = parse_command(line);
+        execvp(command->progname, command->args);
     }
     return 0;
 }
