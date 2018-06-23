@@ -13,8 +13,16 @@ int main() {
     
     while(fputs(prompt, stdout)) {
         getline(&line, &len, stdin);
-        cmd_struct *command = parse_command(line);
-        execvp(command->progname, command->args);
+
+        int pid = fork();
+        if(pid < 0) {
+            fprintf(stderr, "Fork failed\n"); 
+        } else if(pid == 0) { // child process
+            cmd_struct *command = parse_command(line);
+            execvp(command->progname, command->args);
+        } else { // parent process
+            int w = wait(NULL); // wait for the child to end
+        }
     }
     return 0;
 }
